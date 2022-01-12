@@ -14,9 +14,12 @@ async function bootstrap() {
     .setDescription('cat')
     .setVersion('1.0.0')
     .build();
-  const document = SwaggerModule.createDocument(app, config);
+  const document: OpenAPIObject = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
-
+  app.enableCors({
+    origin: true,
+    credentials: true,
+  });
   const PORT = process.env.PORT;
   await app.listen(PORT);
 }
